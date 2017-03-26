@@ -1,0 +1,21 @@
+.navBusinessRightCol
+{
+width: 410px;
+}
+#globalHeaderTabOB .navBusinessTab
+{
+width: 640px;
+}
+#navCompanyContent .navBusinessRightCol p
+{
+padding-top: 0;
+}
+#navCompanyContent.navBusinessTab
+{
+width: 640px;
+}
+.navCompanyRightCol.navBusinessRightCol .navTitle
+{
+margin: 10px 0 0;
+padding-bottom:10px;
+}

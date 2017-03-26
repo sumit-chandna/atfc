@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><style type="text/css">[uib-typeahead-popup].dropdown-menu{display:block;}</style><style type="text/css">.uib-time input{width:50px;}</style><style type="text/css">.uib-datepicker .uib-title{width:100%;}.uib-day button,.uib-month button,.uib-year button{min-width:100%;}.uib-datepicker-popup.dropdown-menu{display:block;}.uib-button-bar{padding:10px 9px 2px;}</style><style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Airlines Technology - Flights Information List</title>
+
+<title>Airtech Pilot</title>
+
+
+
+<link rel="shortcut icon" type="image/x-icon" href="http://localhost:8080/airtech/resources/static/img/title-logo.png">
+<link type="text/css" rel="stylesheet" href="Airlines%20Technology%20-%20Flights%20Information%20List_files/bootstrap.css">
+<!-- Optional theme -->
+<link type="text/css" rel="stylesheet" href="Airlines%20Technology%20-%20Flights%20Information%20List_files/bootstrap-theme.css">
+<!-- Custome css -->
+<link type="text/css" rel="stylesheet" href="Airlines%20Technology%20-%20Flights%20Information%20List_files/custom.css">
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery_004.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery-ui.js"></script>
+<script src="Airlines%20Technology%20-%20Flights%20Information%20List_files/bootstrap.js"></script>
+<link rel="stylesheet" href="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery-ui.css">
+
+<script>
+	$(document)
+			.ready(
+					function() {
+
+						$('[data-toggle="tooltip"]').tooltip({
+							placement : "bottom"
+						});
+
+						$("#btn-modify-search").click(
+								function() {
+									$("#modify-flight-journey").slideDown(
+											"slow");
+									$('.flight-filter-details').addClass(
+											'gradient-grey');
+									$(this).hide();
+								});
+
+						$("#btn-search-flight")
+								.click(
+										function() {
+											$("#modify-flight-journey")
+													.slideUp('slow');
+											$('.flight-filter-details')
+													.removeClass(
+															'gradient-grey');
+											$('#btn-modify-search').show();
+										});
+
+						$("#btn-cancel")
+								.click(
+										function() {
+											$("#modify-flight-journey")
+													.slideUp('slow');
+											$('.flight-filter-details')
+													.removeClass(
+															'gradient-grey');
+											$('#btn-modify-search').show();
+										});
+
+						//var chooseAirline = document.getElementsByName("selectAirlines");
+						$('.selectAirlines')
+								.click(
+										function() {
+											/*if($('.table-flights-details tr').hasClass('selected-flight-user'))
+											{
+												//alert('hi2');
+												$('.table-flights-details tr').removeClass('selected-flight-user');
+											}
+											 */
+											var parentTr = $(this)
+													.closest('tr');
+											if ($(this).is(':checked')) {
+												parentTr.siblings().addClass(
+														"selected-flight-user");
+												parentTr
+														.addClass("selected-flight-user");
+											} else if (!$(this).is(':checked')) {
+												parentTr
+														.siblings()
+														.removeClass(
+																"selected-flight-user");
+												parentTr
+														.removeClass("selected-flight-user");
+											}
+
+											var checkCount = $('input[name="selectAirlines"]:checked').length;
+											//alert(checkCount);
+											if (checkCount > 3) {
+												alert('Select only 3 flight for comparison');
+												$(this).removeAttr('checked');
+												parentTr
+														.siblings()
+														.removeClass(
+																"selected-flight-user");
+												parentTr
+														.removeClass("selected-flight-user");
+											}
+										});
+						
+						
+						 $('#datepickerDeparture').on('change', function() {
+					          $('#datepickerReturn').datepicker("option", "minDate", $('#datepickerDeparture').datepicker('getDate'));
+					      });
+					      $('#datepickerReturn').on('change', function() {
+					          $('#datepickerDeparture').datepicker("option", "maxDate", $('#datepickerReturn').datepicker('getDate'));
+					      });
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						var dateToday = new Date();
+						$("#datepickerDeparture")
+								.datepicker(
+										{
+											dateFormat : 'yy-mm-dd',
+											showOn : "button",
+											buttonImage : "/airtech/resources/static/img/calendar.gif",
+											buttonImageOnly : true,
+											buttonText : "Select date",
+											showOn : "both",
+											minDate : dateToday
+										});
+						var dateToday = new Date();
+						$("#datepickerReturn")
+								.datepicker(
+										{
+											dateFormat : 'yy-mm-dd',
+											showOn : "button",
+											buttonImage : "/airtech/resources/static/img/calendar.gif",
+											buttonImageOnly : true,
+											buttonText : "Select date",
+											showOn : "both",
+											minDate : dateToday
+										});
+						$('.dobbookingform')
+								.each(
+										function() {
+											$(this)
+													.datepicker(
+															{
+																dateFormat : 'yy-mm-dd',
+																showOn : "button",
+																buttonImage : "/airtech/resources/static/img/calendar.gif",
+																buttonImageOnly : true,
+																buttonText : "Select date",
+																showOn : "both"
+															});
+										});
+						$('.filter-heading').click(
+								function() {
+									$(this).siblings('ul').slideToggle('fast');
+									if ($(this).hasClass(
+											'filter-heading-expand')) {
+										$(this).addClass(
+												'filter-heading-collapse');
+										$(this).removeClass(
+												'filter-heading-expand');
+									} else if ($(this).hasClass(
+											'filter-heading-collapse')) {
+										$(this).addClass(
+												'filter-heading-expand');
+										$(this).removeClass(
+												'filter-heading-collapse');
+									}
+								});
+
+						$('.filter-stops ul li').click(
+								function() {
+									//alert('hi');
+
+									if ($(this).hasClass('filter-current')) {
+										$(this).addClass('filter-active')
+												.removeClass('filter-current');
+										$(this).siblings('li').removeClass(
+												'filter-active').addClass(
+												'filter-current');
+									}
+									var location = "filter?"
+											+ $(this).attr('data-attribute')
+											+ "=" + $(this).attr('data-value');
+									document.location = location;
+								});
+
+						$('.filter-outbound ul li').click(
+								function() {
+									//alert('hi');
+
+									if ($(this).hasClass('filter-current')) {
+										$(this).addClass('filter-active')
+												.removeClass('filter-current');
+										$(this).siblings('li').removeClass(
+												'filter-active').addClass(
+												'filter-current');
+									}
+									var location = "filter?"
+											+ $(this).attr('data-attribute')
+											+ "=" + $(this).attr('data-value');
+									document.location = location;
+								});
+
+						$('.filter-inbound ul li').click(
+								function() {
+									//alert('hi');
+
+									if ($(this).hasClass('filter-current')) {
+										$(this).addClass('filter-active')
+												.removeClass('filter-current');
+										$(this).siblings('li').removeClass(
+												'filter-active').addClass(
+												'filter-current');
+									}
+									var location = "filter?"
+											+ $(this).attr('data-attribute')
+											+ "=" + $(this).attr('data-value');
+									document.location = location;
+
+								});
+
+						$('.filter-reset').click(
+								function() {
+									$('.filter-stops ul li').removeClass(
+											'filter-active').addClass(
+											'filter-current');
+									$('.filter-outbound ul li').removeClass(
+											'filter-active').addClass(
+											'filter-current');
+									;
+									$('.filter-inbound ul li').removeClass(
+											'filter-active').addClass(
+											'filter-current');
+									;
+									var location = "filter/reset";
+									document.location = location;
+								});
+
+					});
+
+	function downloadXml(container, title) {
+		var currentdate = new Date();
+		var datetime = currentdate.getDate() + "/"
+				+ (currentdate.getMonth() + 1) + "/"
+				+ currentdate.getFullYear() + "@" + currentdate.getHours()
+				+ ":" + currentdate.getMinutes() + ":"
+				+ currentdate.getSeconds();
+		title += datetime + ".xml";
+		var content = $('#' + container).find('pre').text().trim();
+		var element = document.createElement('a');
+		element.setAttribute('href', 'data:text/xml;charset=utf-8,'
+				+ encodeURIComponent(content));
+		element.setAttribute('download', title);
+
+		element.style.display = 'none';
+		document.body.appendChild(element);
+
+		element.click();
+
+		document.body.removeChild(element);
+	}
+</script>
+<!-- bin/jquery.slider.min.css -->
+<link rel="stylesheet" href="Airlines%20Technology%20-%20Flights%20Information%20List_files/jslider.css" type="text/css">
+<!-- end -->
+
+
+
+<!-- bin/jquery.slider.min.js -->
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jshashtable-2.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/tmpl.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery_002.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/draggable-0.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery_003.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/angular.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/angular-ui-router.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/ui-bootstrap.js"></script>
+
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Airlines Technology - Flights Information List</title>
+
+<title>Airtech Pilot</title>
+
+
+
+<link rel="shortcut icon" type="image/x-icon" href="http://localhost:8080/airtech/resources/static/img/title-logo.png">
+<link type="text/css" rel="stylesheet" href="Airlines%20Technology%20-%20Flights%20Information%20List_files/bootstrap.css">
+<!-- Optional theme -->
+<link type="text/css" rel="stylesheet" href="Airlines%20Technology%20-%20Flights%20Information%20List_files/bootstrap-theme.css">
+<!-- Custome css -->
+<link type="text/css" rel="stylesheet" href="Airlines%20Technology%20-%20Flights%20Information%20List_files/custom.css">
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery_004.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery-ui.js"></script>
+<script src="Airlines%20Technology%20-%20Flights%20Information%20List_files/bootstrap.js"></script>
+<link rel="stylesheet" href="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery-ui.css">
+
+<script>
+	$(document)
+			.ready(
+					function() {
+
+						$('[data-toggle="tooltip"]').tooltip({
+							placement : "bottom"
+						});
+
+						$("#btn-modify-search").click(
+								function() {
+									$("#modify-flight-journey").slideDown(
+											"slow");
+									$('.flight-filter-details').addClass(
+											'gradient-grey');
+									$(this).hide();
+								});
+
+						$("#btn-search-flight")
+								.click(
+										function() {
+											$("#modify-flight-journey")
+													.slideUp('slow');
+											$('.flight-filter-details')
+													.removeClass(
+															'gradient-grey');
+											$('#btn-modify-search').show();
+										});
+
+						$("#btn-cancel")
+								.click(
+										function() {
+											$("#modify-flight-journey")
+													.slideUp('slow');
+											$('.flight-filter-details')
+													.removeClass(
+															'gradient-grey');
+											$('#btn-modify-search').show();
+										});
+
+						//var chooseAirline = document.getElementsByName("selectAirlines");
+						$('.selectAirlines')
+								.click(
+										function() {
+											/*if($('.table-flights-details tr').hasClass('selected-flight-user'))
+											{
+												//alert('hi2');
+												$('.table-flights-details tr').removeClass('selected-flight-user');
+											}
+											 */
+											var parentTr = $(this)
+													.closest('tr');
+											if ($(this).is(':checked')) {
+												parentTr.siblings().addClass(
+														"selected-flight-user");
+												parentTr
+														.addClass("selected-flight-user");
+											} else if (!$(this).is(':checked')) {
+												parentTr
+														.siblings()
+														.removeClass(
+																"selected-flight-user");
+												parentTr
+														.removeClass("selected-flight-user");
+											}
+
+											var checkCount = $('input[name="selectAirlines"]:checked').length;
+											//alert(checkCount);
+											if (checkCount > 3) {
+												alert('Select only 3 flight for comparison');
+												$(this).removeAttr('checked');
+												parentTr
+														.siblings()
+														.removeClass(
+																"selected-flight-user");
+												parentTr
+														.removeClass("selected-flight-user");
+											}
+										});
+
+						$("#datepickerDeparture")
+								.datepicker(
+										{
+											dateFormat : 'yy-mm-dd',
+											showOn : "button",
+											buttonImage : "/airtech/resources/static/img/calendar.gif",
+											buttonImageOnly : true,
+											buttonText : "Select date",
+											showOn : "both"
+										});
+
+						$("#datepickerReturn")
+								.datepicker(
+										{
+											dateFormat : 'yy-mm-dd',
+											showOn : "button",
+											buttonImage : "/airtech/resources/static/img/calendar.gif",
+											buttonImageOnly : true,
+											buttonText : "Select date",
+											showOn : "both"
+										});
+						$('.dobbookingform')
+								.each(
+										function() {
+											$(this)
+													.datepicker(
+															{
+																dateFormat : 'yy-mm-dd',
+																showOn : "button",
+																buttonImage : "/airtech/resources/static/img/calendar.gif",
+																buttonImageOnly : true,
+																buttonText : "Select date",
+																showOn : "both"
+															});
+										});
+						$('.filter-heading').click(
+								function() {
+									$(this).siblings('ul').slideToggle('fast');
+									if ($(this).hasClass(
+											'filter-heading-expand')) {
+										$(this).addClass(
+												'filter-heading-collapse');
+										$(this).removeClass(
+												'filter-heading-expand');
+									} else if ($(this).hasClass(
+											'filter-heading-collapse')) {
+										$(this).addClass(
+												'filter-heading-expand');
+										$(this).removeClass(
+												'filter-heading-collapse');
+									}
+								});
+
+						$('.filter-stops ul li').click(
+								function() {
+									//alert('hi');
+
+									if ($(this).hasClass('filter-current')) {
+										$(this).addClass('filter-active')
+												.removeClass('filter-current');
+										$(this).siblings('li').removeClass(
+												'filter-active').addClass(
+												'filter-current');
+									}
+									var location = "filter?"
+											+ $(this).attr('data-attribute')
+											+ "=" + $(this).attr('data-value');
+									document.location = location;
+								});
+
+						$('.filter-outbound ul li').click(
+								function() {
+									//alert('hi');
+
+									if ($(this).hasClass('filter-current')) {
+										$(this).addClass('filter-active')
+												.removeClass('filter-current');
+										$(this).siblings('li').removeClass(
+												'filter-active').addClass(
+												'filter-current');
+									}
+									var location = "filter?"
+											+ $(this).attr('data-attribute')
+											+ "=" + $(this).attr('data-value');
+									document.location = location;
+								});
+
+						$('.filter-inbound ul li').click(
+								function() {
+									//alert('hi');
+
+									if ($(this).hasClass('filter-current')) {
+										$(this).addClass('filter-active')
+												.removeClass('filter-current');
+										$(this).siblings('li').removeClass(
+												'filter-active').addClass(
+												'filter-current');
+									}
+									var location = "filter?"
+											+ $(this).attr('data-attribute')
+											+ "=" + $(this).attr('data-value');
+									document.location = location;
+
+								});
+
+						$('.filter-reset').click(
+								function() {
+									$('.filter-stops ul li').removeClass(
+											'filter-active').addClass(
+											'filter-current');
+									$('.filter-outbound ul li').removeClass(
+											'filter-active').addClass(
+											'filter-current');
+									;
+									$('.filter-inbound ul li').removeClass(
+											'filter-active').addClass(
+											'filter-current');
+									;
+									var location = "filter/reset";
+									document.location = location;
+								});
+
+					});
+
+	function downloadXml(container, title) {
+		var currentdate = new Date();
+		var datetime = currentdate.getDate() + "/"
+				+ (currentdate.getMonth() + 1) + "/"
+				+ currentdate.getFullYear() + "@" + currentdate.getHours()
+				+ ":" + currentdate.getMinutes() + ":"
+				+ currentdate.getSeconds();
+		title += datetime + ".xml";
+		var content = $('#' + container).find('pre').text().trim();
+		var element = document.createElement('a');
+		element.setAttribute('href', 'data:text/xml;charset=utf-8,'
+				+ encodeURIComponent(content));
+		element.setAttribute('download', title);
+
+		element.style.display = 'none';
+		document.body.appendChild(element);
+
+		element.click();
+
+		document.body.removeChild(element);
+	}
+</script>
+<!-- bin/jquery.slider.min.css -->
+<link rel="stylesheet" href="Airlines%20Technology%20-%20Flights%20Information%20List_files/jslider.css" type="text/css">
+<!-- end -->
+
+
+
+<!-- bin/jquery.slider.min.js -->
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jshashtable-2.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/tmpl.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery_002.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/draggable-0.js"></script>
+<script type="text/javascript" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/jquery_003.js"></script>
+<script src="Airlines%20Technology%20-%20Flights%20Information%20List_files/app.js"></script>
+<script src="Airlines%20Technology%20-%20Flights%20Information%20List_files/orderSearch.js"></script>
+
+<!-- end -->
+
+</head>
+<body ng-app="rootApp" class="ng-scope">
+	<div class="loading-dialog" data-loading="" style="display: none;"></div>
+	<nav class="navbar navbar-inverse" style="min-height: 50px; margin-top: 5px">
+		<div class="container">
+			<div class="navbar-header">
+
+				<a class="navbar-brand" href="http://localhost:8080/airtech" style="padding: 0px;"><img src="Airlines%20Technology%20-%20Flights%20Information%20List_files/logo.png"></a>
+			</div>
+
+			<div id="userSignIn" class="row col-md-7 col-lg-6 pull-right" style="margin-top: 5px;">
+
+				<div style="margin-top: 10px; margin-left: 10px;" class="pull-right">
+					<button type="submit" class="btn btn-default-small" data-toggle="modal" data-target="#logindiv">
+						<span style="padding-right: 6px;" aria-hidden="true" class="glyphicon glyphicon-user"></span>My Account
+					</button>
+				</div>
+				<div style="margin-top: 10px" class="pull-right">
+					<button type="submit" class="btn btn-default-small" data-toggle="modal" data-target="#orderSearchDiv">
+						<span style="padding-right: 6px;" aria-hidden="true" class="glyphicon"></span>Order Search
+					</button>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div id="body">
+		<script src="Airlines%20Technology%20-%20Flights%20Information%20List_files/search.js%3bjsessionid=5BD8B657421641588A8CBBD8DE3E3953"></script>
+ 
+<div class="container-fluid container-background-image" style="min-height:800px"> 
+    <!-- /.Sign up wrapper -->
+    <div class="sign-up-wrapper col-md-10 col-lg-8 " style="width: 60%;border-radius:10px">
+    <div class="col-md-2 clearfix sign-up-wrapper-title">Book a Trip</div>
+    <div class="clearfix"></div>
+    
+  
+
+
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+ var myArr = [];
+ 
+ $.ajax({
+   type: "GET",
+   url: "/airtech/resources/static/xml/airport-codes.xml", 
+   dataType: "xml",
+   success: parseXml,
+   complete: PopulateAirportCode,
+   failure: function(data) {
+     alert("XML File could not be found");
+   }
+ });
+ 
+ function parseXml(xml)
+ {
+	 
+	var airport = {
+			    name:$(this).attr("airport"),
+			    code:$(this).attr("code")
+	};
+   //find every query value
+   $(xml).find("iata-airport").each(function()
+   {
+     myArr.push($(this).attr("code"));
+   });
+ }
+ 
+ function PopulateAirportCode() {
+   $("input#DepartureCity").autocomplete({
+   source: myArr,
+   minLength: 2,
+   select: function(event, ui) {
+     $("input#DepartureCity").val(ui.item.value.name);
+     
+   }
+  });
+   
+   $("input#destinationCity").autocomplete({
+	   source: myArr,
+	   minLength: 2,
+	   select: function(event, ui) {
+	     $("input#destinationCity").val(ui.item.value);
+	     
+	   }
+	  });
+   
+ }
+});
+</script>
+
+
+
+<form id="searchflightform" style="padding-left: 0;" action="/airtech/search;jsessionid=5BD8B657421641588A8CBBD8DE3E3953" method="post" class="ng-pristine ng-valid">
+	<div class="clearfix">
+		<!-- Left Column Start -->
+		<div style="border-right: 1px solid #cccbcb;" class="col-md-8 col-lg-9">
+			<div class="row">
+				<div class="radio col-xs-5 col-sm-3 col-md-3 col-lg-3">
+					<label> <input id="roundTrip" name="tripType" checked="checked" value="Round Trip" type="radio">
+						Round Trip
+					</label>
+				</div>
+				<div style="margin-top: 10px;" class="radio col-xs-5 col-sm-3 col-md-3 col-lg-3">
+					<label> <input id="onewayTrip" name="tripType" value="One-way" type="radio"> One-way
+					</label>
+				</div>
+				<div class="checkbox col-xs-5 col-sm-3 col-md-3 col-lg-3">
+					<label> <input id="marginDaysSelected1" name="marginDaysSelected" value="true" type="checkbox"><input name="_marginDaysSelected" value="on" type="hidden">
+						+/- 3days
+					</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-xs-3 col-sm-5 col-md-5 col-lg-5">
+					<label for="DepartureCity">Departure City / airport</label>
+					<input id="DepartureCity" name="departureCity" class="form-control ui-autocomplete-input" autocomplete="off" type="text">
+				</div>
+				<div class="form-group col-xs-3 col-sm-5 col-md-5 col-lg-5">
+					<label for="exampleInputEmail1">Destination city / airport</label>
+					<input id="destinationCity" name="destinationCity" class="form-control ui-autocomplete-input" autocomplete="off" type="text">
+				</div>
+			</div>
+			<div class="row">
+				<div style="padding-right: 0px;" class="datepicker form-group col-xs-3 col-sm-5 col-md-6 col-lg-5">
+					<label for="exampleInputEmail1" class="col-sm-4 col-md-4 col-lg-4 control-label" style="padding: 5px 0px">Departure</label>
+					<div style="padding-left: 0px" class="col-sm-5 col-md-8 col-lg-8">
+						<input id="datepickerDeparture" name="departureDate" style="width:100px;" class="form-control hasDatepicker" type="text"><img class="ui-datepicker-trigger" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/calendar.gif" alt="Select date" title="Select date">
+
+					</div>
+				</div>
+				<div class="datepicker form-group col-xs-3 col-sm-5 col-md-6 col-lg-5" id="returndatediv">
+					<label for="exampleInputEmail1" class="col-sm-4 col-lg-4 control-label" style="padding: 5px 0px">Return</label>
+					<div class="col-sm-5 col-md-8 col-lg-8" style="padding-right: 0px; padding-left: 0px;">
+						<input id="datepickerReturn" name="returnDate" style="width:100px;" class="form-control hasDatepicker" type="text"><img class="ui-datepicker-trigger" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/calendar.gif" alt="Select date" title="Select date">
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-xs-3 col-sm-3 col-md-2 col-lg-2" style="padding-right: 0px; width: 15%">
+					<div class="clearfix">
+						<label>Adult</label>
+					</div>
+					<div style="padding-left: 0px; padding-right: 0px;" class="col-md-11 col-lg-9">
+						<select id="adultCount" name="adultCount" class="form-control">
+							<option selected="selected" value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							
+							
+						</select>
+					</div>
+				</div>
+				<div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-2" style="padding-right: 0px; width: 20%">
+					<div class="clearfix">
+						<label>Child (2-12 yrs)</label>
+					</div>
+					<div class="col-md-7 col-lg-9" style="padding-left: 0px;">
+						<select id="childCount" name="childCount" class="form-control">
+							<option value="0" selected="selected">0</option>
+							<option value="1">1</option>
+
+						</select>
+					</div>
+				</div>
+				<div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-right: 0px; padding-left: 20px">
+					<div class="clearfix">
+						<label>Infant (0-2 yrs)</label>
+					</div>
+					<div class="col-md-7 col-lg-9" style="padding-left: 0px;">
+						<select id="infantCount" name="infantCount" class="form-control">
+							<option value="0" selected="selected">0</option>
+							<option value="1">1</option>
+
+						</select>
+					</div>
+				</div>
+				<div class="form-group col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-left: 0px;">
+					<label>Travel Class</label>
+					<select id="cabinCode" name="cabinCode" class="form-control">
+					<option value="0" selected="selected">ALL</option>
+					<option value="5">Economy</option>
+						<option value="1">First</option>
+						<option value="2">Business</option>
+						<option value="4">Premium Economy</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<!-- Left Coulmn End -->
+		<!-- Right Column Start -->
+		<div style="border-left: 1px solid #fff" class="col-md-4 col-lg-3 clearfix">
+			<div class="front-heading text-center">Prefer la carte services?</div>
+			<div class="row">
+				<div style="padding: 0px; text-align: center" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<img class="img-rounded" alt="..." src="Airlines%20Technology%20-%20Flights%20Information%20List_files/WiFi-Selected.png"> <br>
+					<input id="wifiSelected1" name="wifiSelected" value="true" type="checkbox"><input name="_wifiSelected" value="on" type="hidden">
+				</div>
+				<div style="padding: 0px; text-align: center" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<img class="img-rounded" alt="..." src="Airlines%20Technology%20-%20Flights%20Information%20List_files/icon-special-meal.png"> <br>
+					<input id="mealSelected1" name="mealSelected" value="true" type="checkbox"><input name="_mealSelected" value="on" type="hidden">
+				</div>
+
+			</div>
+			<div class="row">
+				<div style="padding: 0px; text-align: center" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<img class="img-rounded" alt="..." src="Airlines%20Technology%20-%20Flights%20Information%20List_files/icon-window.png"> <br>
+					<input id="windowSelected1" name="windowSelected" value="true" type="checkbox"><input name="_windowSelected" value="on" type="hidden">
+				</div>
+				<div style="padding: 0px; text-align: center" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<img class="img-rounded" alt="..." src="Airlines%20Technology%20-%20Flights%20Information%20List_files/icon-tv.png"> <br>
+					<input id="tvSelected1" name="tvSelected" value="true" type="checkbox"><input name="_tvSelected" value="on" type="hidden">
+				</div>
+
+			</div>
+
+			<div style="padding: 0px; text-align: center; margin-top: 55px;" class="row">
+				<!-- <div style="padding: 0px; text-align: left" class="col-xs-5 col-sm-5 col-md-5 col-lg-9">
+					<label>NDC Framework</label>
+					<select id="NDCFramework" name="ndcFramework" class="form-control ">
+						<option value="ALL">ALL</option>
+						<option selected="selected" value="BA">British Airways</option>
+						<option value="C9">Kronos</option>
+						<option value="9A">Athena</option>
+					</select>
+				</div> -->
+				<div style="padding: 0px; text-align: left" class="col-xs-5 col-sm-5 col-md-5 col-lg-9">
+					<label>Languages Prefered</label>
+					<select id="languageCode" name="languageCode" class="form-control ">
+						<option value="EN" selected="selected">English</option>
+						<option value="ES">Spanish</option>
+						<option value="JA">Japanese</option>
+						<option value="FR">French</option>
+						<option value="IT">Italian</option>
+						<option value="ZH">Chinese</option>
+						<option value="DE">German</option>
+						<option value="PT">Portuguese</option>
+						<option value="RU">Russian</option>
+						<option value="PL">Polish</option>
+						<option value="SV">Swedish</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<!-- Right Column End-->
+		<!-- form button start -->
+	<div class="col-lg-12 clearfix" style="padding-left: 0px">
+		<a  class="btn btn-default" href="listing.htm">Search
+			Flight</a>
+	</div>
+	<!-- form button end -->
+	</div>
+	
+</form>
+
+  
+  </div>
+    <!-- /.Sign up wrapper end --> 
+  </div>
+	</div>
+
+	<div id="logindiv" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade" style="display: none;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title text-left" id="myModalLabel">Login</h4>
+				</div>
+				<div class="modal-body" style="padding-top: 0px; padding-bottom: 30px; min-height: 110px">
+					<form id="loginform" action="login;jsessionid=5BD8B657421641588A8CBBD8DE3E3953" method="post" class="ng-pristine ng-valid">
+						<div id="userSignIn">
+
+							<div class="form-group col-xs-3 col-sm-5 col-md-5 col-lg-5">
+								<label for="emailId">Email or User Profile ID</label> <input name="username" id="username" class="form-control" type="text">
+
+							</div>
+							<div class="col-xs-3 col-sm-5 col-md-5 col-lg-5">
+								<div class="form-group">
+									<label for="password">Password</label> <input name="password" id="password" class="form-control" type="password">
+
+								</div>
+								<div class="clearfix">
+
+									<a href="#" class="link-blue" style="margin-right: 5px"> <img src="Airlines%20Technology%20-%20Flights%20Information%20List_files/icon-forgetpassword.png" style="padding-right: 2px;" border="0">Forgot Password
+									</a> <a class="link-blue" href="http://localhost:8080/airtech/signup;jsessionid=5BD8B657421641588A8CBBD8DE3E3953"><img style="padding-right: 2px;" src="Airlines%20Technology%20-%20Flights%20Information%20List_files/icon-signup.png" border="0">Sign
+										up</a>
+								</div>
+							</div>
+
+						</div>
+						<div style="margin-top: 20px">
+
+
+							<input name="ctl00$btnLogin" value="Login" id="btnLogin" class="btn btn-default-small" style="display: block;" type="submit">
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="orderSearchDiv" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal fade ng-scope" style="display: none;" ng-controller="orderSearchController">
+
+		<div class="modal-dialog modal-mm" style="width: 45em;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title text-left" id="myModalLabel">Order
+						Search</h4>
+				</div>
+				<div class="modal-body" style="padding-top: 10px;">
+					<form class="form-horizontal ng-pristine ng-valid" id="orderSearchForm" action="orderSearch;jsessionid=5BD8B657421641588A8CBBD8DE3E3953" method="post">
+						<div class="form-group">
+							<label for="pnr_number" class="col-sm-2 control-label" style="padding-right: 0px; width: 13%;">Pnr Number</label>
+							<div class="col-sm-3">
+								<input id="pnr_number" ng-model="searchData.pnr" placeholder="Pnr" class="form-control ng-pristine ng-untouched ng-valid" type="text">
+							</div>
+							<label for="ndc_framework" class="col-sm-3 control-label" style="padding-right: 0px; padding-left: 0px; width: 15%;">Ndc
+								Framework</label>
+							<div class="col-sm-3">
+								<select ng-model="searchData.ndcFramework" class="form-control ng-pristine ng-untouched ng-valid" id="ndc_framework">
+									<option value="" selected="selected">--SELECT--</option>
+									<!-- <option value="ALL">ALL</option> -->
+									<option value="BA">British Airways</option>
+									<option value="C9">Kronos</option>
+									<option value="9A">Athena</option>
+								</select>
+							</div>
+							<div class="col-sm-1">
+								<a  class="btn btn-default-small " style="display: block;"  href="listing.htm">Search</a>
+							</div>
+
+						</div>
+					</form>
+					<span class="alert alert-error ng-binding ng-hide" style="color: red;" ng-show="error"></span>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<footer>
+		<div class="container">
+			<p>This website and its content is copyright of Airlines
+				Technology - © Airlines Technology 2015.</p>
+		</div>
+	</footer>
+
+
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div><ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none;"></ul><span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span><ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-2" tabindex="0" style="display: none;"></ul><span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span></body></html>

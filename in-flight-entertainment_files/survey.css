@@ -1,0 +1,24 @@
+#xxxsurveyOverlay {background: rgb(0,0,0); background: none repeat scroll 0 0 rgba(0, 0, 0, 0.7); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; left:0; top:0; right:0; bottom:0; overflow:hidden; position:fixed; text-align:center; top:0; z-index:100000; display:none;}	
+#surveyOverlay {
+	background: url(/assets/scripts/global/applications/survey/images/surveyBG.png) repeat scroll 0 0;
+	left:0; top:0; right:0; bottom:0; overflow:hidden; position:fixed; text-align:center; top:0; z-index:100000; display:none;}	
+.surveyContainer {display:inline-block; margin:10% auto; width:580px; background-color:#FFF; box-shadow:0 5px 40px rgba(0, 0, 0, 0.75); margin-top:10%; text-align:left; padding:20px; color:#000 !important; position:relative; z-index:500000 !important;}
+.surveyExit {display:block; height:40px; outline:medium none; position:absolute; right:-20px; top:-20px; width:40px; background: url('/assets/images/global/site/icons/close_lightbox.png');}
+.surveyExit:hover { background: url('/assets/images/global/site/icons/close_lightbox_hover.png'); }
+.surveyCorpLogo {float:right !important;}
+.surveyHeading { font-family: 'MyliusModernRegular', 'DejaVu Sans', Helvetica, Arial, sans-serif; font-size: 36px; font-weight: normal; color: #172e4d; margin: 40px 0 20px 0; text-rendering: optimizeLegibility; height:auto !important;}
+.surveyContent { margin-bottom: 10px; }
+.surveySubContent { font-weight:bold; }
+.surveyContent, .surveySubContent { color: #666; font-size: 14px; line-height: 17px; }
+.surveyHorizontalLine { background-color: #f0f0f0; height: 5px; margin-top: 30px; }
+.surveySubmitOptions { overflow: auto; margin-top: 20px; }
+#surveyAccept { background: #ce210f; background: -moz-linear-gradient(top, #ff3e3e 0%, #ce210f 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3e3e), color-stop(100%,#ce210f)); background: -webkit-linear-gradient(top, #ff3e3e 0%,#ce210f 100%); background: -o-linear-gradient(top, #ff3e3e 0%,#ce210f 100%); background: -ms-linear-gradient(top, #ff3e3e 0%,#ce210f 100%); background: linear-gradient(top, #ff3e3e 0%,#ce210f 100%); color:#FFF;  border-radius:2px; float:right; font-size:14px; padding:3px 10px; text-decoration:none; }
+#surveyAccept:hover { background: #ff3e3e; background: -moz-linear-gradient(top,  #ff7777 0%, #ff3e3e 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff7777), color-stop(100%,#ff3e3e)); background: -webkit-linear-gradient(top,  #ff7777 0%,#ff3e3e 100%); background: -o-linear-gradient(top,  #ff7777 0%,#ff3e3e 100%); background: -ms-linear-gradient(top,  #ff7777 0%,#ff3e3e 100%); background: linear-gradient(top,  #ff7777 0%,#ff3e3e 100%); }
+#surveyAccept:active {background-color:#FF3E3E;}
+#surveyAccept:focus {background-color:#FF3E3E;}
+#surveyDecline {color:#4b97fa; font-weight:bold; font-size:14px; float: left; margin-top: 3px; text-decoration:none;}
+#surveyDecline:hover {color:#4B97FA; text-decoration: underline;}
+#surveyDecline:active {color:#4B97FA;}
+#surveyDecline:focus {color:#4B97FA;}
+.surveyFooter {color:#666;  font-size: 12px; margin: 30px 0 10px 0;}
+.surveySiteLogo {float: left; margin-bottom: 40px;}

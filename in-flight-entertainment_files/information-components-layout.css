@@ -1,0 +1,211 @@
+/*****************************/
+/***** SIDENAV STYLES ********/
+/*****************************/
+/* 
+JVT - 20 Feb - the markup for this component is different to destinations version, so leave this here.
+*/
+
+nav#siteMapNavContainer {
+	margin: 0px;
+}
+nav#siteMapNavContainer.sub-UL {
+	display: none;
+}
+nav#siteMapNavContainer h3 {
+	background-color: #F0F0F0;
+	margin:0;
+	padding: 34px 20px 20px;
+}
+nav#siteMapNavContainer h3 > a{
+	text-decoration:underline;
+	color:#172E4D;
+}
+
+nav#siteMapNavContainer h3  a:hover{
+	color:#4b97fa;
+}
+nav#siteMapNavContainer ul.top-level, 
+nav#siteMapNavContainer ul.top-level li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 180px;
+	float: left;
+}
+nav#siteMapNavContainer ul.top-level {
+	border-bottom: 5px solid #e0e0e0;
+}
+nav#siteMapNavContainer ul.top-level li a {
+	display: block;
+	position: relative;
+	zoom: 1;
+	padding-left:20px;
+	background-color: #f0f0f0;
+	border-top: 1px solid #e0e0e0;
+	min-height: 27px;
+	font-size: 14px;
+	color: #555;
+}
+nav#siteMapNavContainer ul.top-level li a:hover {
+	background-color: #172E4D;
+	color: #fff;
+	text-decoration: none;
+}
+nav#siteMapNavContainer ul.top-level li.selected a {
+	background-color: #3c78c7;
+	color: #fff;
+	width: 160px; /*for old IE*/
+}
+nav#siteMapNavContainer ul.top-level li.selected.hasSub.open a {
+	background-color: #3c78c7;
+	color: #fff;
+	font-weight: bold;
+}
+nav#siteMapNavContainer ul.top-level li.selected.hasSub.open.activeParent a {
+	background-color: #fff;
+	color: #172e4d;
+}
+nav#siteMapNavContainer ul.top-level li.selected.hasSub.open ul.sub-UL li:first-child a {
+	border-top: 0;
+}
+nav#siteMapNavContainer ul.top-level li.selected.hasSub.open.activeParent ul.sub-UL li:first-child a {
+	border-top: 2px solid #E0E0E0;
+}
+nav#siteMapNavContainer ul.top-level li a span {
+	padding: 6px 20px 6px 0;
+	display: block;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.open a {
+	background-color: #fff;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.open ul.sub-UL {
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+/**** Sub UL LI ****/
+
+nav#siteMapNavContainer ul.top-level li.hasSub a span {
+	background: url('/assets/images/global/site/icons/navChevron.gif') no-repeat 145px 10px;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub a:hover {
+	background-color: #172e4d;
+	text-decoration: none;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.closed a:hover,
+nav#siteMapNavContainer ul.top-level li.hasSub.closed:hover a {
+	width: 161px;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub:hover li a {
+	background-color: #172e4d;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub a:hover span {
+	background: url('/assets/images/global/site/icons/navChevronOn.png') no-repeat 145px 10px;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.open a:hover span {
+	background: 0;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.open ul.sub-UL li {
+	padding-left: 20px;
+	width: 160px;
+}
+nav#siteMapNavContainer ul.top-level li.selected.hasSub.open ul.sub-UL li a {
+	background-color: #fff;
+	padding-left: 10px;
+	font: normal 12px Arial,sans-serif;
+	color: #777;
+	min-height: 25px;
+	border-top: 1px solid #E0E0E0;
+	width: 150px;
+}
+nav#siteMapNavContainer ul.top-level li.open a span, 
+nav#siteMapNavContainer ul.top-level li.hasSub.open ul.sub-UL li a span {
+	background: none;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.open ul.sub-UL li.selected a, 
+nav#siteMapNavContainer ul.top-level li.hasSub.open ul.sub-UL li.selected a:hover {
+	background-color: #3c78c7;
+	color: #fff;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.open ul.sub-UL li a:hover {
+	background-color: #4b97fa;
+	color: #fff;
+}
+
+/* Flyout tertiary */
+
+nav#siteMapNavContainer ul.top-level li.hasSub.closed {
+	position: relative;
+  	z-index: 11; /* Please Leave this z-index to 11, this ensures that the fly-out menu will stay above all other components on the page */
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.closed ul.sub-UL {
+	display:inline;
+	position: absolute;
+	left: -9999px;
+	top: 1px;
+	width: 220px;
+	padding: 1px 20px 5px 20px;
+	background-color: #172e4d;
+	margin: 0;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.closed:hover ul.sub-UL {
+	left: 181px;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.closed:hover {
+	width:auto;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.closed:hover a {
+	background-color: #172E4D;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.closed:hover a span {
+	box-shadow: none;
+	background: url('/assets/images/global/site/icons/navChevronOn.png') no-repeat 145px 10px;
+	color: #fff;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.closed ul.sub-UL li a {
+	background: none;
+	border: 0;
+	min-height: 25px;
+	padding: 0;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.closed ul.sub-UL li a span, 
+nav#siteMapNavContainer ul.top-level li.hasSub.closed ul.sub-UL li a:hover span {
+	background: none;
+	box-shadow: none;
+	font: normal 12px Arial,sans-serif;
+	color: #fff;
+	border-top: 1px solid #2f435f;
+	padding: 7px 0;
+	width: 220px;
+	cursor: pointer;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.closed ul.sub-UL li:first-child a span {
+	border: none;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.closed ul.sub-UL li a:hover span {
+	color: #4b97fa;
+}
+
+/* Shadows for the Left Hand Nav - Remove lines below if we decide to not have shadows. */
+nav#siteMapNavContainer h3,
+nav#siteMapNavContainer ul.top-level li.selected.hasSub.open.activeParent a span,
+nav#siteMapNavContainer ul.top-level li a span,
+nav#siteMapNavContainer ul.top-level li.hasSub.open ul.sub-UL li a span {
+	box-shadow: inset -20px 0 15px -20px #ccc;
+}
+nav#siteMapNavContainer ul.top-level li.selected.hasSub.open a span,
+nav#siteMapNavContainer ul.top-level li.selected a span, 
+nav#siteMapNavContainer ul.top-level li.hasSub.open ul.sub-UL li.selected a span,
+nav#siteMapNavContainer ul.top-level li.selected a:hover span, 
+nav#siteMapNavContainer ul.top-level li.hasSub.open ul.sub-UL li.selected a:hover span {
+	box-shadow: inset -20px 0 15px -20px #3D64C6;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub.open ul.sub-UL li a:hover span {
+	box-shadow: inset -20px 0 15px -20px #4271F4;
+}
+nav#siteMapNavContainer ul.top-level li.hasSub a:hover span,
+nav#siteMapNavContainer ul.top-level li a:hover span {
+	box-shadow: none;
+}
+
